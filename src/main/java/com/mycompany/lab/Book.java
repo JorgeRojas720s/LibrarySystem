@@ -1,6 +1,6 @@
 package com.mycompany.lab;
-
 import java.util.ArrayList;
+import java.util.List;
 
 public class Book implements Librarie {
 
@@ -9,7 +9,7 @@ public class Book implements Librarie {
     private int ISBM;
 
     private boolean available;
-
+    
     private ArrayList<Person> authors;
 
     public Book(String name, int ISBM, ArrayList author) {
@@ -18,6 +18,10 @@ public class Book implements Librarie {
         this.available = true;
         this.authors = author;
     }
+    
+    public Book() {
+    }
+
 
     @Override
     public void borrow() {
