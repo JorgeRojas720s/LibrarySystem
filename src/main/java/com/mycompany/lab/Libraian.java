@@ -1,5 +1,7 @@
 package com.mycompany.lab;
 
+import java.util.ArrayList;
+
 public class Libraian extends Person implements Librarie {
 
     public Libraian(String name, int id) {
@@ -15,7 +17,7 @@ public class Libraian extends Person implements Librarie {
     }
 
     @Override
-    public void create() {
+    public void create(String title, int ISBM, ArrayList<Person> author) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

@@ -6,13 +6,18 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class App extends Application {
 
     public static String[] main(String[] args) {
         System.out.println("hola");
-        DBConnection.getInstance();
-        DBConnection.getInstance().connect("db_bim");
+        
+        ArrayList author = new <Person>ArrayList(); 
+        author.add(new BookAuthor("Jorge", 1));
+        
+        Book book = new Book("hola", 12, author);
+        book.create(book.getTitle(), book.getISBM(), author);
         return null;
    
     }
