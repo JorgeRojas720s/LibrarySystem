@@ -1,0 +1,9 @@
+com\mycompany\lab\App.class
+com\mycompany\lab\BookAuthor.class
+module-info.class
+com\mycompany\lab\Book.class
+com\mycompany\lab\DBConnection.class
+com\mycompany\lab\Libraian.class
+com\mycompany\lab\Person.class
+com\mycompany\lab\Client.class
+com\mycompany\lab\Librarie.class
