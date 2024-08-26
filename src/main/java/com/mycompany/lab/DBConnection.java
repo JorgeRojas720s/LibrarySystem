@@ -17,7 +17,7 @@ public class DBConnection {
 
     private Connection connection;
 
-    private final String dbName = "db_bim";
+    private final String dbName = "librarie";
 
     public static synchronized DBConnection getInstance() {
         if (instance == null) {
@@ -29,7 +29,7 @@ public class DBConnection {
     public void connect(String dbName) {
         String url = "jdbc:mariadb://localhost:3306/" + dbName;
         String user = "root";
-        String pass = "0";
+        String pass = "";
         try {
             Class.forName("org.mariadb.jdbc.Driver");
             connection = DriverManager.getConnection(url, user, pass);
@@ -50,5 +50,41 @@ public class DBConnection {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    
+    public List<Book> getBorrowBooks(){
+        try {
+            connect("librarie");
+
+            String consultation = "SELECT * FROM tbl_books";
+            List<Book> bookList = new ArrayList<>();
+
+            PreparedStatement statement = connection.prepareStatement(consultation);
+
+            ResultSet resultados = statement.executeQuery();
+
+            while (resultados.next()) {
+                Book book = new Book();
+
+                book.setTitle(resultados.getString("boo_title"));
+                book.setISBM(resultados.getInt("boo_ISBM"));
+                book.setAvailable(resultados.getBoolean("boo_available"));
+                book.setAuthors(null);
+
+                if(book.isAvailable()){
+                    bookList.add(book);
+                }
+            }
+
+            resultados.close();
+            statement.close();
+            connection.close();
+
+            return bookList;
+
+        } catch (Exception e) {
+            System.out.println("No sirve hp");
+        }
+        return null;
     }
 }

@@ -1,5 +1,7 @@
 package com.mycompany.lab;
 
+import java.util.List;
+
 public class Book implements Librarie {
 
     private String title;
@@ -8,10 +10,14 @@ public class Book implements Librarie {
 
     private boolean available;
 
-    private Person[] authors;
+    private List<Person> authors;
 
     public Book(String name, int ISBM, boolean available) {
     }
+    
+    public Book() {
+    }
+
 
     @Override
     public void borrow() {
@@ -32,4 +38,38 @@ public class Book implements Librarie {
     public void update() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getISBM() {
+        return ISBM;
+    }
+
+    public void setISBM(int ISBM) {
+        this.ISBM = ISBM;
+    }
+
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
+    public List<Person> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(List<Person> authors) {
+        this.authors = authors;
+    }
+    
+    
 }
