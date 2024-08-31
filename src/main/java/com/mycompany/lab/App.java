@@ -15,9 +15,9 @@ public class App extends Application {
         System.out.println("hola");
         
         ArrayList author = new <Person>ArrayList(); 
-        author.add(new BookAuthor("Jorge", 1));
+        author.add(new BookAuthor("Fabian", 2));
         
-        Book book = new Book("hola", 12, author);
+        Book book = new Book("zierda", 13, author);
         book.create(book.getTitle(), book.getISBM(), author);
 
         List<Book> list = DBConnection.getInstance().getBorrowBooks();

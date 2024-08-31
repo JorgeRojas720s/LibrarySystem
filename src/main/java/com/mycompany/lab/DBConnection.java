@@ -29,7 +29,7 @@ public class DBConnection {
     public void connect(String dbName) {
         String url = "jdbc:mariadb://localhost:3306/" + dbName;
         String user = "root";
-        String pass = "";
+        String pass = "0";
         try {
             Class.forName("org.mariadb.jdbc.Driver");
             connection = DriverManager.getConnection(url, user, pass);
