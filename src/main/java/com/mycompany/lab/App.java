@@ -12,15 +12,19 @@ import java.util.List;
 public class App extends Application {
 
     public static String[] main(String[] args) {
-        System.out.println("hola");
+        //System.out.println("hola");
         
-        ArrayList author = new <Person>ArrayList(); 
-        author.add(new BookAuthor("Jorge", 1));
+        //ArrayList author = new <Person>ArrayList(); 
+        //author.add(new BookAuthor("Jorge", 1));
         
-        Book book = new Book("hola", 12, author);
-        book.create(book.getTitle(), book.getISBM(), author);
+        //Book book = new Book("hola", 12, author);
+        //book.create(book.getTitle(), book.getISBM(), author);
 
         List<Book> list = DBConnection.getInstance().getBorrowBooks();
+        
+        for(Book book : list){
+            System.out.println(book.getTitle());
+        }
         
         return null;
     }
