@@ -5,10 +5,12 @@ public abstract class Person {
     protected String name;
 
     protected int id;
+    
 
     protected Book[] books;
     
     protected String role;
+    
     public Person(String name, int id) {
     }
 
@@ -21,6 +23,12 @@ public abstract class Person {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getRole() {
+        return role;
+    }
+    
+    
 
     public int getId() {
         return id;
@@ -37,5 +45,11 @@ public abstract class Person {
     public void setBooks(Book[] books) {
         this.books = books;
     }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+    
+    
     
 }

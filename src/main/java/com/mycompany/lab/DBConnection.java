@@ -118,4 +118,25 @@ public class DBConnection {
         }
         return null;
     }
+    
+    public void registerUser(Person person){
+    
+    try { connect(dbName);
+    
+        String sql = "INSERT INTO tbl_person (per_name, per_id, per_role) VALUES (?,?,?)";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, person.getName());
+        statement.setInt(2, person.getId());
+        statement.setString(3, person.getRole());
+        
+        statement.executeUpdate();
+        statement.close();
+        disconnect();
+    
+    }catch(Exception e){
+        
+          e.printStackTrace();
+            System.out.println("No se guardo el user");
+    }
+    }
 }
