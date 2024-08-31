@@ -10,11 +10,17 @@ public abstract class Person {
     protected Book[] books;
     
     protected String role;
-    
-    public Person(String name, int id) {
-    }
 
+    public Person(String name, int id, String role) {
+        this.name = name;
+        this.id = id;
+        this.role = role;
+    }
+    
+    
     public abstract void requestAvailableBooks();
+    
+    public abstract void registerPerson(Person person);
 
     public String getName() {
         return name;
