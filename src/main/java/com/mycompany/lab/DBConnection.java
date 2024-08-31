@@ -29,7 +29,7 @@ public class DBConnection {
     public void connect(String dbName) {
         String url = "jdbc:mariadb://localhost:3306/" + dbName;
         String user = "root";
-        String pass = "";
+        String pass = "Zierda:33sql";
         try {
             Class.forName("org.mariadb.jdbc.Driver");
             connection = DriverManager.getConnection(url, user, pass);
@@ -44,7 +44,7 @@ public class DBConnection {
     public void createBook(String title, int ISBM, boolean available, ArrayList<Person> author){
         try {
             connect(dbName);
-            String sql = "INSERT INTO tbl_books (boo_title, book_ISBM, boo_available) VALUES (?,?,?)";
+            String sql = "INSERT INTO tbl_books (boo_title, boo_ISBM, boo_available) VALUES (?,?,?)";
             PreparedStatement insertStatement = connection.prepareStatement(sql);
             insertStatement.setString(1, title);
             insertStatement.setInt(2, ISBM);
@@ -109,7 +109,7 @@ public class DBConnection {
 
             resultados.close();
             statement.close();
-            connection.close();
+            disconnect();
 
             return bookList;
 
