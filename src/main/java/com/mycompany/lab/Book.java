@@ -22,12 +22,6 @@ public class Book implements Librarie {
     public Book() {
     }
 
-
-    @Override
-    public void borrow() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
     public void create(String title, int ISBM, ArrayList<Person> author) {
         DBConnection.getInstance();
         DBConnection.getInstance().createBook(title, ISBM, true, author);
@@ -35,7 +29,7 @@ public class Book implements Librarie {
     }
 
     @Override
-    public void delete() {
+    public void delete(int id) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -74,6 +68,11 @@ public class Book implements Librarie {
 
     public void setAuthors(ArrayList<Person> authors) {
         this.authors = authors;
+    }
+
+    @Override
+    public void borrow(int clientID, int ISBM) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }
