@@ -25,11 +25,13 @@ public class Program {
         System.out.println("4. Modificar libro");
         System.out.println("5. Eliminar libro");
         System.out.println("6. Generar reporte");
+
         System.out.println("7. Salir");
 
         System.out.print("Opcion: ");
         int number = scanner.nextInt();
 
+        scanner.close();
         selectOption(number);
         
     }
@@ -64,6 +66,11 @@ public class Program {
             return null;
         }
         return person;
+    }
+    void clientInfo(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Ingrese el nombre del cliente");
+        
     }
     
     void selectOption(int opt){

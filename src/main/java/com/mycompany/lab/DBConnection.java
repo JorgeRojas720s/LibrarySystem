@@ -44,7 +44,7 @@ public class DBConnection {
     public void createBook(String title, int ISBM, boolean available, ArrayList<Person> author){
         try {
             connect(dbName);
-            String sql = "INSERT INTO tbl_books (boo_title, book_ISBM, boo_available) VALUES (?,?,?)";
+            String sql = "INSERT INTO tbl_books (boo_title, boo_ISBM, boo_available) VALUES (?,?,?)";
             PreparedStatement insertStatement = connection.prepareStatement(sql);
             insertStatement.setString(1, title);
             insertStatement.setInt(2, ISBM);
@@ -109,7 +109,7 @@ public class DBConnection {
 
             resultados.close();
             statement.close();
-            connection.close();
+            disconnect();
 
             return bookList;
 
@@ -138,5 +138,25 @@ public class DBConnection {
           e.printStackTrace();
             System.out.println("No se guardo el user");
     }
+    }
+    
+    public void borrowBook(int bookId, int personId) {
+        try {
+            connect(dbName);
+            String sql = "INSERT INTO tbl_books_x_persons (bxp_book_id, bxp_person_id) VALUES (?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, bookId);
+            statement.setInt(2, personId);
+
+            statement.executeUpdate();
+            statement.close();
+            disconnect();
+
+            System.out.println("Libro prestado");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("No prestado");
+        }
     }
 }
