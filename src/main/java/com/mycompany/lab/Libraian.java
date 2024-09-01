@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 public class Libraian extends Person implements Librarie {
 
-    public Libraian(String name, int id) {
-        super(name, id);
+    public Libraian(String name, int id, String role) {
+        super(name, id, role);
     }
+
+ 
 
     public void generateReport() {
     }
@@ -34,5 +36,11 @@ public class Libraian extends Person implements Librarie {
     @Override
     public void requestAvailableBooks() {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void registerPerson(Person person) {
+        DBConnection.getInstance();
+        DBConnection.getInstance().registerUser(person);
     }
 }
