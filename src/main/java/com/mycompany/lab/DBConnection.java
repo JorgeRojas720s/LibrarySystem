@@ -139,4 +139,24 @@ public class DBConnection {
             System.out.println("No se guardo el user");
     }
     }
+    
+    public void borrowBook(int bookId, int personId) {
+        try {
+            connect(dbName);
+            String sql = "INSERT INTO tbl_books_x_persons (bxp_book_id, bxp_person_id) VALUES (?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, bookId);
+            statement.setInt(2, personId);
+
+            statement.executeUpdate();
+            statement.close();
+            disconnect();
+
+            System.out.println("Libro prestado");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("No prestado");
+        }
+    }
 }
