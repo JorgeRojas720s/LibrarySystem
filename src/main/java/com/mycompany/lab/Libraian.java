@@ -14,17 +14,12 @@ public class Libraian extends Person implements Librarie {
     }
 
     @Override
-    public void borrow() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
     public void create(String title, int ISBM, ArrayList<Person> author) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void delete() {
+    public void delete(int id) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -42,5 +37,10 @@ public class Libraian extends Person implements Librarie {
     public void registerPerson(Person person) {
         DBConnection.getInstance();
         DBConnection.getInstance().registerUser(person);
+    }
+
+    @Override
+    public void borrow(int clientID, int ISBM) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
