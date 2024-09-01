@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public interface Librarie {
 
-    public void borrow();
+    public void borrow(int clientID, int ISBM);
 
-    public void create(String title, int ISBM, ArrayList<Person> author);
+    public void create(Book book);
 
-    public void delete();
+    public void delete(int id);
 
     public void update();
 }

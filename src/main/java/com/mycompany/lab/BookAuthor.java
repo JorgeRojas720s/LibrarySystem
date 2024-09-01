@@ -15,7 +15,6 @@ public class BookAuthor extends Person {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
-    
 
     public String getName() {
         return name;
@@ -44,7 +43,7 @@ public class BookAuthor extends Person {
     @Override
     public void registerPerson(Person person) {
        DBConnection.getInstance();
-        DBConnection.getInstance().registerUser(person);
+       DBConnection.getInstance().registerUser(person);
     }
     
 }

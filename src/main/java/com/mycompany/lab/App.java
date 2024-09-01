@@ -12,9 +12,10 @@ import java.util.List;
 public class App extends Application {
 
     public static String[] main(String[] args) {
+
         System.out.println("hola");
-        
-     
+        Program prg = new Program();
+        prg.menu();
         return null;
     }
 

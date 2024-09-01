@@ -12,11 +12,18 @@ public class Book implements Librarie {
     
     private ArrayList<Person> authors;
 
-    public Book(String name, int ISBM, ArrayList author) {
+    public Book(String name, int ISBM, boolean available, ArrayList<Person> authors) {
         this.ISBM = ISBM;
         this.title = name;
         this.available = true;
-        this.authors = author;
+        this.authors = authors;
+    }
+    
+    public Book(String name, int ISBM, boolean available) {
+        this.ISBM = ISBM;
+        this.title = name;
+        this.available = true;
+
     }
     
     public Book() {
@@ -24,18 +31,7 @@ public class Book implements Librarie {
 
 
     @Override
-    public void borrow() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    public void create(String title, int ISBM, ArrayList<Person> author) {
-        DBConnection.getInstance();
-        DBConnection.getInstance().createBook(title, ISBM, true, author);
-        
-    }
-
-    @Override
-    public void delete() {
+    public void delete(int id) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -60,7 +56,7 @@ public class Book implements Librarie {
         this.ISBM = ISBM;
     }
 
-    public boolean isAvailable() {
+    public boolean getAvailable() {
         return available;
     }
 
@@ -74,6 +70,19 @@ public class Book implements Librarie {
 
     public void setAuthors(ArrayList<Person> authors) {
         this.authors = authors;
+    }
+
+
+
+    @Override
+    public void create(Book book) {
+        DBConnection.getInstance();
+        DBConnection.getInstance().createBook(book);
+    }
+
+    @Override
+    public void borrow(int clientID, int ISBM) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }
