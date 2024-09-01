@@ -12,15 +12,10 @@ import java.util.List;
 public class App extends Application {
 
     public static String[] main(String[] args) {
-<<<<<<< HEAD
+
         System.out.println("hola");
         Program prg = new Program();
         prg.menu();
-=======
-        //System.out.println("hola");
-     
-
->>>>>>> db4ffb6f5b6c3cb50337136ff95a2ee890be3e05
         return null;
     }
 

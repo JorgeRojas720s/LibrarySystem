@@ -29,11 +29,8 @@ public class DBConnection {
     public void connect(String dbName) {
         String url = "jdbc:mariadb://localhost:3306/" + dbName;
         String user = "root";
-<<<<<<< HEAD
         String pass = "0";
-=======
-        String pass = "Zierda:33sql";
->>>>>>> db4ffb6f5b6c3cb50337136ff95a2ee890be3e05
+
         try {
             Class.forName("org.mariadb.jdbc.Driver");
             connection = DriverManager.getConnection(url, user, pass);
@@ -142,5 +139,25 @@ public class DBConnection {
           e.printStackTrace();
             System.out.println("No se guardo el user");
     }
+    }
+    
+    public void borrowBook(int bookId, int personId) {
+        try {
+            connect(dbName);
+            String sql = "INSERT INTO tbl_books_x_persons (bxp_book_id, bxp_person_id) VALUES (?, ?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, bookId);
+            statement.setInt(2, personId);
+
+            statement.executeUpdate();
+            statement.close();
+            disconnect();
+
+            System.out.println("Libro prestado");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("No prestado");
+        }
     }
 }
