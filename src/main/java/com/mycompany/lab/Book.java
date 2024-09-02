@@ -3,8 +3,7 @@ package com.mycompany.lab;
 import java.util.ArrayList;
 
 /**
- * Representa un libro en la biblioteca.
- * Implementa la interfaz Librarie.
+ * The prinpincipal class for book handler
  * 
  * @author Ismael Marchena Méndez
  * @author Jorge Rojas Mena
@@ -12,20 +11,21 @@ import java.util.ArrayList;
  */
 public class Book implements Librarie {
 
-    private String title;
-    private int ISBM;
-    private boolean available;
     private ArrayList<Person> authors;
+    private boolean available;
+    private int ISBM;
+    private String title;
 
     /**
-     * Constructor de la clase Book.
+     * Constructor of Boook.
      * 
-     * @param name El título del libro.
-     * @param ISBM El número ISBM del libro.
-     * @param available La disponibilidad del libro.
-     * @param authors La lista de autores del libro.
+     * @param name Title of the book
+     * @param ISBM ISBM of the book.
+     * @param available If the book is available.
+     * @param authors The authors of the book.
      */
-    public Book(String name, int ISBM, boolean available, ArrayList<Person> authors) {
+    public Book(String name, int ISBM, boolean available, 
+            ArrayList<Person> authors) {
         this.ISBM = ISBM;
         this.title = name;
         this.available = available;
@@ -33,11 +33,11 @@ public class Book implements Librarie {
     }
 
     /**
-     * Constructor de la clase Book sin lista de autores.
+     * Constructor of nook without author.
      * 
-     * @param name El título del libro.
-     * @param ISBM El número ISBM del libro.
-     * @param available La disponibilidad del libro.
+     * @param name Title of the book
+     * @param ISBM ISBM of the book.
+     * @param available If the book is available.
      */
     public Book(String name, int ISBM, boolean available) {
         this.ISBM = ISBM;
@@ -47,7 +47,7 @@ public class Book implements Librarie {
     }
 
     /**
-     * Constructor vacío de la clase Book.
+     * Void Constructor.
      */
     public Book() {
         this.ISBM = 0;
@@ -57,7 +57,7 @@ public class Book implements Librarie {
     }
 
     /**
-     * Actualiza el libro en la base de datos.
+     * Update the information of a book in the database.
      */
     @Override
     public void update() {
@@ -65,9 +65,9 @@ public class Book implements Librarie {
     }
 
     /**
-     * Elimina el libro de la base de datos.
+     * Delete a book from the database.
      * 
-     * @param id El ID del libro a eliminar.
+     * @param id ID of the book to delete.
      */
     @Override
     public void delete(int id) {
@@ -107,9 +107,9 @@ public class Book implements Librarie {
     }
 
     /**
-     * Crea un nuevo libro en la base de datos.
+     * Adds a book to the database.
      * 
-     * @param book El libro a crear.
+     * @param book Book to add.
      */
     @Override
     public void create(Book book) {
@@ -117,10 +117,10 @@ public class Book implements Librarie {
     }
 
     /**
-     * Presta un libro al cliente.
+     * Borroe a book to a client.
      * 
-     * @param clientID El ID del cliente.
-     * @param ISBM El número ISBM del libro.
+     * @param clientID Client ID.
+     * @param ISBM ISMB of the book to be borrow.
      */
     @Override
     public void borrow(int clientID, int ISBM) {

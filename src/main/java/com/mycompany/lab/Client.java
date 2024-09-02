@@ -1,8 +1,8 @@
 package com.mycompany.lab;
 
 /**
- * Representa a un cliente de la biblioteca.
- * Extiende la clase Person.
+ * Represents a client in the librarie.
+ * Extends the class person.
  * 
  * @author Ismael Marchena Méndez
  * @author Jorge Rojas Mena
@@ -11,20 +11,21 @@ package com.mycompany.lab;
 public class Client extends Person {
 
     /**
-     * Constructor de la clase Client.
+     * Constructor of the class Client.
      * 
-     * @param name El nombre del cliente.
-     * @param id El ID del cliente.
-     * @param role El rol del cliente.
+     * @param name Name of the client.
+     * @param id ID of the client.
+     * @param role Role of the client (client).
      */
     public Client(String name, int id, String role) {
         super(name, id, role);
     }
 
     /**
-     * Solicita un libro (vacío).
+     * Request a book.
      */
     public void requestBook() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override

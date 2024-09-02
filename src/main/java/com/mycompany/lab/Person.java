@@ -1,25 +1,26 @@
 package com.mycompany.lab;
 
 /**
- * Representa una persona en la biblioteca (cliente, autor o trabajador).
+ * Represents a person (cliente, autor o trabajador).
  * 
  * @author Ismael Marchena Méndez
  * @author Jorge Rojas Mena
  * @author Fabian Arguedas León
  */
+
 public abstract class Person {
 
-    protected String name;
-    protected int id;
     protected Book[] books;
+    protected int id;
+    protected String name;
     protected String role;
 
     /**
-     * Constructor de la clase Person.
+     * Constructor of the class Person.
      * 
-     * @param name El nombre de la persona.
-     * @param id El ID de la persona.
-     * @param role El rol de la persona (cliente, autor, trabajador).
+     * @param name Name of the person.
+     * @param id ID of the person.
+     * @param role Role of the person (client, author, worker).
      */
     public Person(String name, int id, String role) {
         this.name = name;
@@ -28,14 +29,14 @@ public abstract class Person {
     }
 
     /**
-     * Solicita los libros disponibles en la biblioteca.
+     * Request for the available books.
      */
     public abstract void requestAvailableBooks();
 
     /**
-     * Registra una persona en la base de datos.
+     * Add a person to the database.
      * 
-     * @param person La persona a registrar.
+     * @param person person to be add.
      */
     public abstract void registerPerson(Person person);
 

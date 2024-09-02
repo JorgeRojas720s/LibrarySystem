@@ -3,8 +3,8 @@ package com.mycompany.lab;
 import java.util.ArrayList;
 
 /**
- * Representa a un bibliotecario.
- * Extiende la clase Person e implementa la interfaz Librarie.
+ * Represents the librarian.
+ * Extends the class Person and implements the Librarie interface.
  * 
  * @author Ismael Marchena Méndez
  * @author Jorge Rojas Mena
@@ -13,18 +13,18 @@ import java.util.ArrayList;
 public class Libraian extends Person implements Librarie {
 
     /**
-     * Constructor de la clase Libraian.
+     * Constructor of the class Libraian.
      * 
-     * @param name El nombre del bibliotecario.
-     * @param id El ID del bibliotecario.
-     * @param role El rol del bibliotecario.
+     * @param name Name of the librairan.
+     * @param id ID librairan.
+     * @param role Role of the librarian (worker).
      */
     public Libraian(String name, int id, String role) {
         super(name, id, role);
     }
 
     /**
-     * Genera un reporte de los libros que están disponibles con sus autores
+     * Creates a report of the available books with there authors.
      */
     public ArrayList generateReport() {
         DBConnection.getInstance();

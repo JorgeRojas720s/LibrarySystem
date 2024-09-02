@@ -8,8 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * Clase para manejar la conexión a la base de datos.
- * Implementa el patrón de diseño Singleton para asegurar que solo haya una instancia de la conexión.
+ * Class to handle the Database connection.
+ * Imprements Singleton for make sure theres only one instace of the Database.
  * 
  * @author Ismael Marchena Méndez
  * @author Jorge Rojas Mena
@@ -17,15 +17,15 @@ import java.util.ArrayList;
  */
 public class DBConnection {
 
-    private static DBConnection instance = null;
     private Connection connection;
-
+    private static DBConnection instance = null;
     private final String dbName = "librarie";
 
+
     /**
-     * Obtiene la instancia única de DBConnection.
+     * Obtains the instace of the class DBConnection.
      * 
-     * @return La instancia única de DBConnection.
+     * @return Return the instance of the class DBConnection.
      */
     public static synchronized DBConnection getInstance() {
         if (instance == null) {
@@ -35,9 +35,9 @@ public class DBConnection {
     }
 
     /**
-     * Establece la conexión a la base de datos.
+     * Start the connection to the database.
      * 
-     * @param dbName El nombre de la base de datos a conectar.
+     * @param dbName Name of the database to be connect.
      */
     public void connect(String dbName) {
         String url = "jdbc:mariadb://localhost:3306/" + dbName;
@@ -51,12 +51,13 @@ public class DBConnection {
         } catch (SQLException ex) {
             System.out.println(ex);
         } catch (Exception ex) {
-            System.out.println("Error, no se ha podido cargar el MariaDB JDBC Driver");
+            System.out.println("Error, no se ha podido "
+                    + "cargar el MariaDB JDBC Driver");
         }
     }
 
     /**
-     * Cierra la conexión a la base de datos.
+     * Close the connection of the database.
      */
     public void disconnect() {
         try {
@@ -70,14 +71,15 @@ public class DBConnection {
     }
 
     /**
-     * Inserta un libro en la base de datos.
+     * Insert the book to the database.
      * 
-     * @param book El libro a insertar.
+     * @param book The book to be insert.
      */
     public void createBook(Book book) {
         try {
             connect(dbName);
-            String sql = "INSERT INTO tbl_books (boo_title, boo_ISBM, boo_available) VALUES (?,?,?)";
+            String sql = "INSERT INTO tbl_books (boo_title,"
+                    + " boo_ISBM, boo_available) VALUES (?,?,?)";
             PreparedStatement insertStatement = connection.prepareStatement(sql);
             insertStatement.setString(1, book.getTitle());
             insertStatement.setInt(2, book.getISBM());
@@ -95,13 +97,14 @@ public class DBConnection {
     }
 
     /**
-     * Registra los autores de un libro en la base de datos.
+     * Register an author to the database.
      * 
-     * @param book El libro cuyos autores se van a registrar.
+     * @param book The book of the author to be save.
      */
     public void registerAuthors(Book book) {
         try {
-            String sql = "INSERT INTO tbl_person (per_name, per_id, per_role) VALUES (?,?,?)";
+            String sql = "INSERT INTO tbl_person (per_name, per_id, per_role)"
+                    + " VALUES (?,?,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
 
             for (Person person : book.getAuthors()) {
@@ -119,14 +122,15 @@ public class DBConnection {
     }
 
     /**
-     * Inserta las relaciones entre libros y personas en la base de datos.
+     * Insert the relation of the books with persons.
      * 
-     * @param book El libro cuyos autores se van a relacionar.
+     * @param book Book of the author to realation.
      */
     public void bookXPersons(Book book) {
 
         try {
-            String sql2 = "INSERT INTO tbl_books_x_persons (bxp_book_id, bxp_person_id) VALUES (?, ?)";
+            String sql2 = "INSERT INTO tbl_books_x_persons (bxp_book_id,"
+                    + " bxp_person_id) VALUES (?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql2);
 
             for (Person person : book.getAuthors()) {
@@ -143,9 +147,9 @@ public class DBConnection {
     }
 
     /**
-     * Obtiene una lista de los libros prestados.
+     * Obtain the list of the books that are available.
      * 
-     * @return Una lista de libros prestados.
+     * @return Return a list of the available books.
      */
     public ArrayList<Book> getBorrowBooks() {
         try {
@@ -154,7 +158,8 @@ public class DBConnection {
             String bookQuery = "SELECT * FROM tbl_books";
             ArrayList<Book> bookList = new ArrayList<>();
 
-            PreparedStatement bookStatement = connection.prepareStatement(bookQuery);
+            PreparedStatement bookStatement = 
+                    connection.prepareStatement(bookQuery);
             ResultSet bookResults = bookStatement.executeQuery();
 
             while (bookResults.next()) {
@@ -186,19 +191,22 @@ public class DBConnection {
     }
 
     /**
-     * Obtiene los autores para un libro específico.
+     * Obtains the author of a book.
      * 
-     * @param bookISBM El ISBM del libro cuyo autor se quiere obtener.
-     * @return Una lista de autores del libro.
+     * @param bookISBM ISBM of the book.
+     * @return List of the authors.
      */
     private ArrayList<Person> getAuthorsForBook(int bookISBM) {
         ArrayList<Person> authors = new ArrayList<>();
         try {
-            String authorQuery = "SELECT p.per_name, p.per_id, p.per_role FROM tbl_person p "
-                    + "JOIN tbl_books_x_persons bxp ON p.per_id = bxp.bxp_person_id "
+            String authorQuery = "SELECT p.per_name, p.per_id, p.per_role "
+                    + "FROM tbl_person p "
+                    + "JOIN tbl_books_x_persons bxp ON p.per_id = "
+                    + "bxp.bxp_person_id "
                     + "WHERE bxp.bxp_book_id = ?";
 
-            PreparedStatement authorStatement = connection.prepareStatement(authorQuery);
+            PreparedStatement authorStatement = 
+                    connection.prepareStatement(authorQuery);
             authorStatement.setInt(1, bookISBM);
 
             ResultSet authorResults = authorStatement.executeQuery();
@@ -221,16 +229,17 @@ public class DBConnection {
     }
 
     /**
-     * Registra un usuario en la base de datos.
+     * Register an user in the database.
      * 
-     * @param person La persona (usuario) a registrar.
+     * @param person The person to be register.
      */
     public void registerUser(Person person) {
 
         try {
             connect(dbName);
 
-            String sql = "INSERT INTO tbl_person (per_name, per_id, per_role) VALUES (?,?,?)";
+            String sql = "INSERT INTO tbl_person (per_name, per_id, per_role) "
+                    + "VALUES (?,?,?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, person.getName());
             statement.setInt(2, person.getId());
@@ -248,15 +257,16 @@ public class DBConnection {
     }
 
     /**
-     * Presta un libro a un usuario.
+     * Borrow a book to a person.
      * 
-     * @param bookId El ISBM del libro a prestar.
-     * @param personId La cédula del usuario al que se le presta el libro.
+     * @param bookId ISBM of the book to be borrow.
+     * @param personId ID of the user that is asking for the book.
      */
     public void borrowBook(int bookId, int personId) {
         try {
             connect(dbName);
-            String sql = "INSERT INTO tbl_books_x_persons (bxp_book_id, bxp_person_id) VALUES (?, ?)";
+            String sql = "INSERT INTO tbl_books_x_persons (bxp_book_id,"
+                    + " bxp_person_id) VALUES (?, ?)";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, bookId);
             statement.setInt(2, personId);
@@ -275,14 +285,15 @@ public class DBConnection {
     }
 
     /**
-     * Actualiza la información de un libro en la base de datos.
+     * Update the information of a book in the database.
      * 
-     * @param book El libro con la información actualizada.
+     * @param book The book to be update.
      */
     public void updateBook(Book book) {
         try {
             connect(dbName);
-            String sql = "UPDATE tbl_books SET boo_title = ?, boo_available = ? WHERE boo_ISBM = ?";
+            String sql = "UPDATE tbl_books SET boo_title = ?, boo_available"
+                    + " = ? WHERE boo_ISBM = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, book.getTitle());
             statement.setBoolean(2, book.getAvailable());
@@ -300,9 +311,9 @@ public class DBConnection {
     }
 
     /**
-     * Elimina un libro de la base de datos.
+     * Delete a book from a database.
      * 
-     * @param id El ISBM del libro a eliminar.
+     * @param id ISBM of the book to be delete.
      */
     public void deleteBook(int id) {
         try {
@@ -323,9 +334,9 @@ public class DBConnection {
     }
 
     /**
-     * Elimina un cliente de la base de datos.
+     * Delete a person from the database.
      * 
-     * @param id La cédula del cliente a eliminar.
+     * @param id id of the person to be delete.
      */
     public void deleteClient(int id) {
         try {
