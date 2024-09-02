@@ -1,14 +1,15 @@
 package com.mycompany.lab;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * Main class of the system
+ * 
+ * @author Ismael Marchena Méndez
+ * @author Jorge Rojas Mena
+ * @author Fabian Arguedas León
+ */
 public class App extends Application {
 
     public static String[] main(String[] args) {
