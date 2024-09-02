@@ -4,17 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Clase principal que maneja la interacción con el usuario y coordina las operaciones de la biblioteca.
+ * 
+ * @author Ismael Marchena Méndez
+ * @author Jorge Rojas Mena
+ * @author Fabian Arguedas León
+ */
 public class Program {
-    static Scanner scanner;
 
+    private static Scanner scanner;
+
+    /**
+     * Constructor de la clase Program.
+     * Inicializa el escáner para la entrada de datos.
+     */
     public Program() {
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Muestra el menú principal y procesa las opciones seleccionadas por el usuario.
+     */
     void menu() {
         int number = 0;
         while (number != 7) {
-            System.out.println("Bienvenido a bliblioteca Zierda");
+            System.out.println("Bienvenido a biblioteca Zierda");
             System.out.println("---------------------------------");
             System.out.println("1. Agregar cliente");
             System.out.println("2. Agregar libro");
@@ -36,6 +51,11 @@ public class Program {
         System.out.println("¡Gracias por usar la biblioteca Zierda!");
     }
 
+    /**
+     * Solicita y devuelve la información de un cliente (persona).
+     * 
+     * @return Un objeto de tipo Person que representa al cliente.
+     */
     Person personInfo() {
         System.out.println("Ingrese el nombre del cliente");
         String name = scanner.next();
@@ -67,33 +87,42 @@ public class Program {
         return person;
     }
 
+    /**
+     * Solicita y devuelve la información de un libro.
+     * 
+     * @return Un objeto de tipo Book que representa el libro.
+     */
     Book bookInfo() {
         System.out.println("Ingrese el nombre del libro");
         String title = scanner.next();
 
         System.out.println("Ingrese el ISBM del libro");
         int ISBM = scanner.nextInt();
-        
+
         System.out.println("Ingrese la cantidad de Autores");
-        int numberAuthors  = scanner.nextInt();
-        
+        int numberAuthors = scanner.nextInt();
+
         ArrayList<Person> authors = new ArrayList<>();
-        
+
         for (int i = 0; i < numberAuthors; i++) {
             System.out.println("Ingrese la cédula del autor");
             int authorID = scanner.nextInt();
-             System.out.println("Ingrese el nombre del autor");
+            System.out.println("Ingrese el nombre del autor");
             String authorName = scanner.next();
             Person author = new BookAuthor(authorName, authorID, "Author");
             authors.add(author);
         }
- 
-            
+
         Book book = new Book(title, ISBM, true, authors);
         book.setAvailable(true);
         return book;
     }
 
+    /**
+     * Solicita la información para prestar un libro y devuelve una lista con el ISBM del libro y la cédula del cliente.
+     * 
+     * @return Una lista de enteros donde el primer elemento es el ISBM del libro y el segundo es la cédula del cliente.
+     */
     public List<Integer> borrowBook() {
         System.out.println("Ingrese el ISBM del libro");
         int ISBM = scanner.nextInt();
@@ -106,21 +135,38 @@ public class Program {
         return info;
     }
 
+    /**
+     * Solicita el ISBM de un libro para borrar y lo devuelve.
+     * 
+     * @return El ISBM del libro a borrar.
+     */
     int bookISBM() {
         System.out.println("Ingrese el ISBM de libro a borrar");
         int ISBM = scanner.nextInt();
         return ISBM;
     }
 
+    /**
+     * Imprime un reporte de los libros proporcionados.
+     * 
+     * @param bookList La lista de libros a mostrar en el reporte.
+     */
     void printReport(List<Book> bookList) {
         for (Book book : bookList) {
             System.out.println("Título: " + book.getTitle() + " ISBM: " + book.getISBM());
-            if( book.getAuthors() != null){
-                System.out.println("Autores: " + book.getAuthors().toString());
-            } 
+            if (book.getAuthors() != null) {
+                for (Person person : book.getAuthors()) {
+                    System.out.println("Autores: " + person.getName());
+                }
+            }
         }
     }
 
+    /**
+     * Selecciona y ejecuta una opción del menú en función del número proporcionado.
+     * 
+     * @param opt El número de la opción seleccionada.
+     */
     void selectOption(int opt) {
         switch (opt) {
             case 1: {
@@ -142,18 +188,22 @@ public class Program {
             }
             break;
             case 4: {
-                Book newBookInfo = bookInfo();
-               // newBookInfo.create(newBookInfo.getTitle(), newBookInfo.getISBM(), newBookInfo.getAvailable());
+                Libraian librarian = new Libraian("", 0, "Worker");
+                librarian.update();
             }
             break;
+
             case 5: {
                 int ISBM = bookISBM();
-                Book book = new Book("", ISBM, false);
-                book.delete(ISBM);
+                Libraian librarian = new Libraian("", 0, "Worker");
+                librarian.delete(ISBM);
             }
             break;
+
             case 6: {
-                List<Book> bookList = DBConnection.getInstance().getBorrowBooks();
+                Libraian librarian = new Libraian("", 0, "Worker");
+                
+                List<Book> bookList = librarian.generateReport();
                 printReport(bookList);
             }
             break;
@@ -164,6 +214,9 @@ public class Program {
         }
     }
 
+    /**
+     * Simula la limpieza de la consola imprimiendo varias líneas vacías.
+     */
     void clearConsole() {
         // Simular la limpieza de la consola imprimiendo varias líneas vacías
         for (int i = 0; i < 50; i++) {
@@ -171,6 +224,11 @@ public class Program {
         }
     }
 
+    /**
+     * Método principal que inicia la aplicación de la biblioteca.
+     * 
+     * @param args Los argumentos de línea de comandos.
+     */
     public static void main(String[] args) {
         Program program = new Program();
         program.menu();

@@ -1,43 +1,77 @@
 package com.mycompany.lab;
-import java.util.ArrayList;
-import java.util.List;
 
+import java.util.ArrayList;
+
+/**
+ * Representa un libro en la biblioteca.
+ * Implementa la interfaz Librarie.
+ * 
+ * @author Ismael Marchena Méndez
+ * @author Jorge Rojas Mena
+ * @author Fabian Arguedas León
+ */
 public class Book implements Librarie {
 
     private String title;
-
     private int ISBM;
-
     private boolean available;
-    
     private ArrayList<Person> authors;
 
+    /**
+     * Constructor de la clase Book.
+     * 
+     * @param name El título del libro.
+     * @param ISBM El número ISBM del libro.
+     * @param available La disponibilidad del libro.
+     * @param authors La lista de autores del libro.
+     */
     public Book(String name, int ISBM, boolean available, ArrayList<Person> authors) {
         this.ISBM = ISBM;
         this.title = name;
-        this.available = true;
+        this.available = available;
         this.authors = authors;
     }
-    
+
+    /**
+     * Constructor de la clase Book sin lista de autores.
+     * 
+     * @param name El título del libro.
+     * @param ISBM El número ISBM del libro.
+     * @param available La disponibilidad del libro.
+     */
     public Book(String name, int ISBM, boolean available) {
         this.ISBM = ISBM;
         this.title = name;
-        this.available = true;
-
+        this.available = available;
+        this.authors = new ArrayList<>();
     }
-    
+
+    /**
+     * Constructor vacío de la clase Book.
+     */
     public Book() {
+        this.ISBM = 0;
+        this.authors = new ArrayList<>();
+        this.available = false;
+        this.title = "";
     }
 
-
-    @Override
-    public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
+    /**
+     * Actualiza el libro en la base de datos.
+     */
     @Override
     public void update() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        DBConnection.getInstance().updateBook(this);
+    }
+
+    /**
+     * Elimina el libro de la base de datos.
+     * 
+     * @param id El ID del libro a eliminar.
+     */
+    @Override
+    public void delete(int id) {
+        DBConnection.getInstance().deleteBook(id);
     }
 
     public String getTitle() {
@@ -72,17 +106,24 @@ public class Book implements Librarie {
         this.authors = authors;
     }
 
-
-
+    /**
+     * Crea un nuevo libro en la base de datos.
+     * 
+     * @param book El libro a crear.
+     */
     @Override
     public void create(Book book) {
-        DBConnection.getInstance();
         DBConnection.getInstance().createBook(book);
     }
 
+    /**
+     * Presta un libro al cliente.
+     * 
+     * @param clientID El ID del cliente.
+     * @param ISBM El número ISBM del libro.
+     */
     @Override
     public void borrow(int clientID, int ISBM) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
-    
 }
