@@ -34,5 +34,5 @@ public interface Librarie {
     /**
      * Update a book.
      */
-    public void update();
+    public void update(Book book);
 }

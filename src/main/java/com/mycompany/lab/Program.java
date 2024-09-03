@@ -1,5 +1,6 @@
 package com.mycompany.lab;
 
+import static java.lang.System.exit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -33,7 +34,7 @@ public class Program {
             System.out.println("---------------------------------");
             System.out.println("1. Agregar cliente");
             System.out.println("2. Agregar libro");
-            System.out.println("3. Prestar libro (No sirve)");
+            System.out.println("3. Prestar libro");
             System.out.println("4. Modificar libro");
             System.out.println("5. Eliminar libro");
             System.out.println("6. Generar reporte");
@@ -187,11 +188,17 @@ public class Program {
                 int ISBM = info.get(0);
                 Libraian librarian = new Libraian("", 0, "");
                 librarian.borrow(clientID, ISBM);
+                
+                Book book = new Book();
+                book.setISBM(ISBM);
+                book.setAvailable(false);
+                librarian.update(book);
             }
             break;
             case 4: {
+                 Book book = bookInfo();
                 Libraian librarian = new Libraian("", 0, "Worker");
-                librarian.update();
+                librarian.update(book);
             }
             break;
 
@@ -210,6 +217,7 @@ public class Program {
             }
             break;
             case 7:
+                exit(0);
                 break;
             default:
                 System.out.println("Opción no válida");

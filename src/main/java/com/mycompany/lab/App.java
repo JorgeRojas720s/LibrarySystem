@@ -1,10 +1,15 @@
 package com.mycompany.lab;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import javafx.application.Application;
 import javafx.stage.Stage;
+
+import javafx.application.Application;
+
+import java.io.IOException;
+
+import javafx.application.Application;
+
+import java.io.IOException;
 
 /**
  * Main class 
@@ -14,17 +19,17 @@ import javafx.stage.Stage;
  * @author Fabian Arguedas León
  */
 
+/**
+ * Main class of the system
+ * 
+ * @author Ismael Marchena Méndez
+ * @author Jorge Rojas Mena
+ * @author Fabian Arguedas León
+ */
 public class App extends Application {
 
     public static String[] main(String[] args) throws IOException{
 
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-//        
-//        
-//        int character = reader.read();
-//
-//        
-        System.out.println("hola");
         Program prg = new Program();
         prg.menu();
         return null;

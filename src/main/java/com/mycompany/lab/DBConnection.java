@@ -8,9 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- * Class to handle the Database connection.
- * Imprements Singleton for make sure theres only one instace of the Database.
- * 
+ * Class to handle the Database connection. Imprements Singleton for make sure
+ * theres only one instace of the Database.
+ *
  * @author Ismael Marchena Méndez
  * @author Jorge Rojas Mena
  * @author Fabian Arguedas León
@@ -21,10 +21,9 @@ public class DBConnection {
     private static DBConnection instance = null;
     private final String dbName = "librarie";
 
-
     /**
      * Obtains the instace of the class DBConnection.
-     * 
+     *
      * @return Return the instance of the class DBConnection.
      */
     public static synchronized DBConnection getInstance() {
@@ -36,7 +35,7 @@ public class DBConnection {
 
     /**
      * Start the connection to the database.
-     * 
+     *
      * @param dbName Name of the database to be connect.
      */
     public void connect(String dbName) {
@@ -72,7 +71,7 @@ public class DBConnection {
 
     /**
      * Insert the book to the database.
-     * 
+     *
      * @param book The book to be insert.
      */
     public void createBook(Book book) {
@@ -98,7 +97,7 @@ public class DBConnection {
 
     /**
      * Register an author to the database.
-     * 
+     *
      * @param book The book of the author to be save.
      */
     public void registerAuthors(Book book) {
@@ -123,7 +122,7 @@ public class DBConnection {
 
     /**
      * Insert the relation of the books with persons.
-     * 
+     *
      * @param book Book of the author to realation.
      */
     public void bookXPersons(Book book) {
@@ -148,18 +147,18 @@ public class DBConnection {
 
     /**
      * Obtain the list of the books that are available.
-     * 
+     *
      * @return Return a list of the available books.
      */
     public ArrayList<Book> getBorrowBooks() {
         try {
             connect("librarie");
 
-            String bookQuery = "SELECT * FROM tbl_books";
+            String bookQuery = "SELECT * FROM tbl_books where boo_available = 1";
             ArrayList<Book> bookList = new ArrayList<>();
 
-            PreparedStatement bookStatement = 
-                    connection.prepareStatement(bookQuery);
+            PreparedStatement bookStatement
+                    = connection.prepareStatement(bookQuery);
             ResultSet bookResults = bookStatement.executeQuery();
 
             while (bookResults.next()) {
@@ -192,7 +191,7 @@ public class DBConnection {
 
     /**
      * Obtains the author of a book.
-     * 
+     *
      * @param bookISBM ISBM of the book.
      * @return List of the authors.
      */
@@ -205,8 +204,8 @@ public class DBConnection {
                     + "bxp.bxp_person_id "
                     + "WHERE bxp.bxp_book_id = ?";
 
-            PreparedStatement authorStatement = 
-                    connection.prepareStatement(authorQuery);
+            PreparedStatement authorStatement
+                    = connection.prepareStatement(authorQuery);
             authorStatement.setInt(1, bookISBM);
 
             ResultSet authorResults = authorStatement.executeQuery();
@@ -230,7 +229,7 @@ public class DBConnection {
 
     /**
      * Register an user in the database.
-     * 
+     *
      * @param person The person to be register.
      */
     public void registerUser(Person person) {
@@ -258,7 +257,7 @@ public class DBConnection {
 
     /**
      * Borrow a book to a person.
-     * 
+     *
      * @param bookId ISBM of the book to be borrow.
      * @param personId ID of the user that is asking for the book.
      */
@@ -286,7 +285,7 @@ public class DBConnection {
 
     /**
      * Update the information of a book in the database.
-     * 
+     *
      * @param book The book to be update.
      */
     public void updateBook(Book book) {
@@ -309,21 +308,42 @@ public class DBConnection {
             System.out.println("No se pudo actualizar el libro");
         }
     }
+/**
+ * Delete the relation of the book from the table book_x_person
+ * @param id 
+ */
+    public void deleteBookXPerson(int id) {
+        try {
+            connect(dbName);
+            String deleteRelationsSQL = "DELETE FROM tbl_books_x_persons WHERE bxp_book_id = ?";
+            PreparedStatement deleteRelationsStatement = connection.prepareStatement(deleteRelationsSQL);
+            deleteRelationsStatement.setInt(1, id);
+            deleteRelationsStatement.executeUpdate();
+            deleteRelationsStatement.close();
+
+            disconnect();
+            System.out.println("Relaciones eliminadas exitosamente");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("No se pudo eliminar las relaciones");
+        }
+    }
 
     /**
-     * Delete a book from a database.
-     * 
+     * Delete a book from the database and there relation whith person.
+     *
      * @param id ISBM of the book to be delete.
      */
     public void deleteBook(int id) {
         try {
             connect(dbName);
-            String sql = "DELETE FROM tbl_books WHERE boo_ISBM = ?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, id);
+            String deleteBookSQL = "DELETE FROM tbl_books WHERE boo_ISBM = ?";
+            PreparedStatement deleteBookStatement = connection.prepareStatement(deleteBookSQL);
+            deleteBookStatement.setInt(1, id);
+            deleteBookStatement.executeUpdate();
+            deleteBookStatement.close();
 
-            statement.executeUpdate();
-            statement.close();
             disconnect();
             System.out.println("Libro eliminado exitosamente");
 
@@ -335,7 +355,7 @@ public class DBConnection {
 
     /**
      * Delete a person from the database.
-     * 
+     *
      * @param id id of the person to be delete.
      */
     public void deleteClient(int id) {

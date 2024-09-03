@@ -60,7 +60,7 @@ public class Book implements Librarie {
      * Update the information of a book in the database.
      */
     @Override
-    public void update() {
+    public void update(Book book) {
         DBConnection.getInstance().updateBook(this);
     }
 

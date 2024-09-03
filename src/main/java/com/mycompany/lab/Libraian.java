@@ -3,9 +3,9 @@ package com.mycompany.lab;
 import java.util.ArrayList;
 
 /**
- * Represents the librarian.
- * Extends the class Person and implements the Librarie interface.
- * 
+ * Represents the librarian. Extends the class Person and implements the
+ * Librarie interface.
+ *
  * @author Ismael Marchena Méndez
  * @author Jorge Rojas Mena
  * @author Fabian Arguedas León
@@ -14,7 +14,7 @@ public class Libraian extends Person implements Librarie {
 
     /**
      * Constructor of the class Libraian.
-     * 
+     *
      * @param name Name of the librairan.
      * @param id ID librairan.
      * @param role Role of the librarian (worker).
@@ -37,8 +37,8 @@ public class Libraian extends Person implements Librarie {
     }
 
     @Override
-    public void update() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void update(Book book) {
+        DBConnection.getInstance().updateBook(book);
     }
 
     @Override
@@ -53,7 +53,8 @@ public class Libraian extends Person implements Librarie {
 
     @Override
     public void borrow(int clientID, int ISBM) {
-       //  DBConnection.getInstance().bookXPersons(person);
+
+        DBConnection.getInstance().borrowBook(ISBM, clientID);
     }
 
     @Override
