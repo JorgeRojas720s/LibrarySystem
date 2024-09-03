@@ -33,7 +33,7 @@ public class Program {
             System.out.println("---------------------------------");
             System.out.println("1. Agregar cliente");
             System.out.println("2. Agregar libro");
-            System.out.println("3. Prestar libro");
+            System.out.println("3. Prestar libro (No sirve)");
             System.out.println("4. Modificar libro");
             System.out.println("5. Eliminar libro");
             System.out.println("6. Generar reporte");

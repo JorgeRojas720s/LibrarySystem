@@ -33,7 +33,7 @@ public class Libraian extends Person implements Librarie {
 
     @Override
     public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        DBConnection.getInstance().deleteBook(id);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class Libraian extends Person implements Librarie {
 
     @Override
     public void borrow(int clientID, int ISBM) {
-        throw new UnsupportedOperationException("Not supported yet.");
+       //  DBConnection.getInstance().bookXPersons(person);
     }
 
     @Override

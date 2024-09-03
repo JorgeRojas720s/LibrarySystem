@@ -1,7 +1,11 @@
 package com.mycompany.lab;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import javafx.application.Application;
 import javafx.stage.Stage;
+
 /**
  * Main class 
  * 
@@ -12,8 +16,14 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
-    public static String[] main(String[] args) {
+    public static String[] main(String[] args) throws IOException{
 
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+//        
+//        
+//        int character = reader.read();
+//
+//        
         System.out.println("hola");
         Program prg = new Program();
         prg.menu();
