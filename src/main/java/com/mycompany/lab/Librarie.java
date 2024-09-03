@@ -1,7 +1,7 @@
 package com.mycompany.lab;
 
 /**
- * Interfaz que define las operaciones para gestionar libros en la biblioteca.
+ * Interface that difines the basic functions of a librarie.
  * 
  * @author Ismael Marchena Méndez
  * @author Jorge Rojas Mena
@@ -10,29 +10,29 @@ package com.mycompany.lab;
 public interface Librarie {
 
     /**
-     * Presta un libro a un cliente.
+     * Borroe a book.
      * 
-     * @param clientID El ID del cliente.
-     * @param ISBM El número ISBM del libro.
+     * @param clientID Client ID.
+     * @param ISBM ISBM of the book.
      */
     public void borrow(int clientID, int ISBM);
 
     /**
-     * Crea un libro en la base de datos.
+     * Add a book to the database.
      * 
-     * @param book El libro a crear.
+     * @param book Book to be create.
      */
     public void create(Book book);
 
     /**
-     * Elimina un libro de la base de datos.
+     * Delete the book from the database.
      * 
-     * @param id El ID del libro a eliminar.
+     * @param id ID of the book to be delete.
      */
     public void delete(int id);
 
     /**
-     * Actualiza un libro en la base de datos.
+     * Update a book.
      */
-    public void update();
+    public void update(Book book);
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Clase principal que maneja la interacción con el usuario y coordina las operaciones de la biblioteca.
+ * Principal class that habdles the client with the librarie.
  * 
  * @author Ismael Marchena Méndez
  * @author Jorge Rojas Mena
@@ -16,15 +16,15 @@ public class Program {
     private static Scanner scanner;
 
     /**
-     * Constructor de la clase Program.
-     * Inicializa el escáner para la entrada de datos.
+     * Constructor of the class Program.
+     * Inicialize the scanner for the inputs.
      */
     public Program() {
         this.scanner = new Scanner(System.in);
     }
 
     /**
-     * Muestra el menú principal y procesa las opciones seleccionadas por el usuario.
+     * Show the principal menu and handle the user request.
      */
     void menu() {
         int number = 0;
@@ -52,9 +52,9 @@ public class Program {
     }
 
     /**
-     * Solicita y devuelve la información de un cliente (persona).
+     * Aks for the information of a person an return a Person object(Person).
      * 
-     * @return Un objeto de tipo Person que representa al cliente.
+     * @return An object of type person that represents the client.
      */
     Person personInfo() {
         System.out.println("Ingrese el nombre del cliente");
@@ -88,9 +88,9 @@ public class Program {
     }
 
     /**
-     * Solicita y devuelve la información de un libro.
+     * Ask for the information of a book and return a book.
      * 
-     * @return Un objeto de tipo Book que representa el libro.
+     * @return Return an object that represents a book.
      */
     Book bookInfo() {
         System.out.println("Ingrese el nombre del libro");
@@ -119,9 +119,10 @@ public class Program {
     }
 
     /**
-     * Solicita la información para prestar un libro y devuelve una lista con el ISBM del libro y la cédula del cliente.
+     * Ask for the information from a book to be borrow and return the client ID
+     * and the book ISBM.
      * 
-     * @return Una lista de enteros donde el primer elemento es el ISBM del libro y el segundo es la cédula del cliente.
+     * @return Return a list with the client ID and the ISBM.
      */
     public List<Integer> borrowBook() {
         System.out.println("Ingrese el ISBM del libro");
@@ -136,9 +137,9 @@ public class Program {
     }
 
     /**
-     * Solicita el ISBM de un libro para borrar y lo devuelve.
+     * Ask for the ISBM of a book to be borrow.
      * 
-     * @return El ISBM del libro a borrar.
+     * @return Return the ISBM of the book to be borrow.
      */
     int bookISBM() {
         System.out.println("Ingrese el ISBM de libro a borrar");
@@ -147,13 +148,14 @@ public class Program {
     }
 
     /**
-     * Imprime un reporte de los libros proporcionados.
+     * Print a report of the books that have been pass.
      * 
-     * @param bookList La lista de libros a mostrar en el reporte.
+     * @param bookList The list of books.
      */
     void printReport(List<Book> bookList) {
         for (Book book : bookList) {
-            System.out.println("Título: " + book.getTitle() + " ISBM: " + book.getISBM());
+            System.out.println("Título: " + book.getTitle() + 
+                    " ISBM: " + book.getISBM());
             if (book.getAuthors() != null) {
                 for (Person person : book.getAuthors()) {
                     System.out.println("Autores: " + person.getName());
@@ -163,9 +165,9 @@ public class Program {
     }
 
     /**
-     * Selecciona y ejecuta una opción del menú en función del número proporcionado.
+     * Handle the input from the menu.
      * 
-     * @param opt El número de la opción seleccionada.
+     * @param opt The number of the option.
      */
     void selectOption(int opt) {
         switch (opt) {
@@ -188,8 +190,9 @@ public class Program {
             }
             break;
             case 4: {
+                 Book book = bookInfo();
                 Libraian librarian = new Libraian("", 0, "Worker");
-                librarian.update();
+                librarian.update(book);
             }
             break;
 
@@ -215,20 +218,19 @@ public class Program {
     }
 
     /**
-     * Simula la limpieza de la consola imprimiendo varias líneas vacías.
+     * Cleans the console.
      */
     void clearConsole() {
-        // Simular la limpieza de la consola imprimiendo varias líneas vacías
         for (int i = 0; i < 50; i++) {
             System.out.println();
         }
     }
 
     /**
-     * Método principal que inicia la aplicación de la biblioteca.
+     * Principal method that start the program.
      * 
-     * @param args Los argumentos de línea de comandos.
-     */
+     * @param args The arguments of the command line.
+.     */
     public static void main(String[] args) {
         Program program = new Program();
         program.menu();

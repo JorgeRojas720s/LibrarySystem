@@ -1,7 +1,14 @@
 package com.mycompany.lab;
-
 import javafx.application.Application;
 import javafx.stage.Stage;
+
+/**
+ * Main class 
+ * 
+ * @author Ismael Marchena Méndez
+ * @author Jorge Rojas Mena
+ * @author Fabian Arguedas León
+ */
 
 /**
  * Main class of the system
@@ -14,7 +21,6 @@ public class App extends Application {
 
     public static String[] main(String[] args) {
 
-        System.out.println("hola");
         Program prg = new Program();
         prg.menu();
         return null;

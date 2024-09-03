@@ -3,9 +3,9 @@ package com.mycompany.lab;
 import java.util.ArrayList;
 
 /**
- * Representa a un bibliotecario.
- * Extiende la clase Person e implementa la interfaz Librarie.
- * 
+ * Represents the librarian. Extends the class Person and implements the
+ * Librarie interface.
+ *
  * @author Ismael Marchena Méndez
  * @author Jorge Rojas Mena
  * @author Fabian Arguedas León
@@ -13,18 +13,18 @@ import java.util.ArrayList;
 public class Libraian extends Person implements Librarie {
 
     /**
-     * Constructor de la clase Libraian.
-     * 
-     * @param name El nombre del bibliotecario.
-     * @param id El ID del bibliotecario.
-     * @param role El rol del bibliotecario.
+     * Constructor of the class Libraian.
+     *
+     * @param name Name of the librairan.
+     * @param id ID librairan.
+     * @param role Role of the librarian (worker).
      */
     public Libraian(String name, int id, String role) {
         super(name, id, role);
     }
 
     /**
-     * Genera un reporte de los libros que están disponibles con sus autores
+     * Creates a report of the available books with there authors.
      */
     public ArrayList generateReport() {
         DBConnection.getInstance();
@@ -33,12 +33,12 @@ public class Libraian extends Person implements Librarie {
 
     @Override
     public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        DBConnection.getInstance().deleteBook(id);
     }
 
     @Override
-    public void update() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void update(Book book) {
+        DBConnection.getInstance().updateBook(book);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class Libraian extends Person implements Librarie {
 
     @Override
     public void borrow(int clientID, int ISBM) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        DBConnection.getInstance().borrowBook(ISBM, clientID);
     }
 
     @Override
