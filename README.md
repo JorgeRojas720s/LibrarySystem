@@ -37,4 +37,3 @@ CREATE TABLE `tbl_books_x_persons` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 COMMIT;
 
-``
